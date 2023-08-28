@@ -1,0 +1,216 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WoocommerceBuybox 1.0\n"
+"POT-Creation-Date: 2016-12-08 15:52+0100\n"
+"PO-Revision-Date: 2016-12-08 15:52+0100\n"
+"Last-Translator: \n"
+"Language-Team: none\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: languages\n"
+
+#: api/buyboxconnect.php:14
+msgid "Making new connection to"
+msgstr "Ouvre une nouvelle connection vers"
+
+#: api/buyboxconnect.php:40
+msgid "Connect failed with CURL method"
+msgstr "Echec de la connection avec la méthode CURL"
+
+#: api/buyboxconnect.php:43
+msgid "Connect with CURL method successfull"
+msgstr "Connection réussie avec la méthode CURL"
+
+#: api/buyboxconnect.php:44
+msgid "Sending this params:"
+msgstr "Envoie des paramètres :"
+
+#: api/buyboxconnect.php:56
+msgid "Send with CURL method failed ! Error:"
+msgstr "Echec de l'envoie avec la méthode CURL ! Erreur :"
+
+#: api/buyboxconnect.php:58
+msgid "Send with CURL method successfull"
+msgstr "Envoie réussi avec la méthode CURL"
+
+#: api/buyboxconnect.php:68
+msgid "Connect failed with fsockopen method"
+msgstr "Echec de la connection avec la méthode fsockopen"
+
+#: api/buyboxconnect.php:81
+msgid "Send with fsockopen method failed !"
+msgstr "Echec de l'envoie avec la méthode fsockopen ! Erreur :"
+
+#: api/buyboxconnect.php:83
+msgid "Send with fsockopen method sucessfull"
+msgstr "Envoie réussi avec la méthode fsockopen"
+
+#: api/buyboxlib.php:38
+msgid "Buybox response:"
+msgstr "Réponse Buybox:"
+
+#: includes/class-wc-buybox-gateway.php:30
+#, php-format
+msgid "Gift card %s &nbsp;"
+msgstr "Carte cadeau %s"
+
+#: includes/class-wc-buybox-gateway.php:42
+msgid "Server Credentials"
+msgstr "Information serveur"
+
+#: includes/class-wc-buybox-gateway.php:44
+msgid ""
+"<b style=\"color: red;\">Prior to the use of this module, please check if "
+"Curl or openSSL are activated on your server.</b><br /><br />Without SSL, "
+"this module will not be able to contact Buybox API<br />"
+msgstr ""
+"<b style=\"color: red;\">Dans le but d'utiliser ce module,</b><br /><br /"
+">Vérifiez si votre serveur supporte Curl ou openSSL.<br />"
+
+#: includes/class-wc-buybox-gateway.php:47
+msgid "Common payment settings"
+msgstr "Réglages du paiement Buybox"
+
+#: includes/class-wc-buybox-gateway.php:51
+msgid "Enable Buybox"
+msgstr "Activer Buybox"
+
+#: includes/class-wc-buybox-gateway.php:53
+msgid "Enable Buybox eGift Card plus Module."
+msgstr "Active le module Buybox eGift Card plus."
+
+#: includes/class-wc-buybox-gateway.php:57
+msgid "Enable sandbox"
+msgstr "Activer sandbox:"
+
+#: includes/class-wc-buybox-gateway.php:59
+msgid "Test mode."
+msgstr "Mode test"
+
+#: includes/class-wc-buybox-gateway.php:63
+msgid "Payment settings"
+msgstr "Réglage du paiement"
+
+#: includes/class-wc-buybox-gateway.php:67
+msgid "API user:"
+msgstr "Utilisateur API:"
+
+#: includes/class-wc-buybox-gateway.php:69
+#: includes/class-wc-buybox-gateway.php:79
+msgid "60 char max."
+msgstr "60 car max."
+
+#: includes/class-wc-buybox-gateway.php:72
+msgid "API password:"
+msgstr "Mot de passe API:"
+
+#: includes/class-wc-buybox-gateway.php:74
+#: includes/class-wc-buybox-gateway.php:88
+msgid "20 char max."
+msgstr "20 car max."
+
+#: includes/class-wc-buybox-gateway.php:77
+msgid "API signature:"
+msgstr "Signature API:"
+
+#: includes/class-wc-buybox-gateway.php:82
+msgid "General settings"
+msgstr "Réglages généraux"
+
+#: includes/class-wc-buybox-gateway.php:86
+msgid "Merchant name:"
+msgstr "Nom du marchand:"
+
+#: includes/class-wc-buybox-gateway.php:91
+msgid "Service domain:"
+msgstr "Domaine du Service:"
+
+#: includes/class-wc-buybox-gateway.php:93
+msgid "Example: lapomme.buybox.net"
+msgstr "Exemple: lapomme.buybox.net"
+
+#: includes/class-wc-buybox-gateway.php:168
+#: includes/class-wc-buybox-gateway.php:169
+msgid "Authorisation to Buybox failed"
+msgstr "L'authorisation auprès de Buybox a échoué"
+
+#: includes/class-wc-buybox-gateway.php:172
+#: includes/class-wc-buybox-gateway.php:330
+#: includes/class-wc-buybox-gateway.php:331
+msgid "Buybox returned error"
+msgstr "Buybox a renvoyé une erreur"
+
+#: includes/class-wc-buybox-gateway.php:173
+#: includes/class-wc-buybox-gateway.php:177
+#: includes/class-wc-buybox-gateway.php:325
+#: includes/class-wc-buybox-gateway.php:326
+msgid "Buybox returned error "
+msgstr "Buybox a renvoyé une erreur "
+
+#: includes/class-wc-buybox-gateway.php:176
+msgid "Token given by Buybox is not the same than cookie one"
+msgstr "Le token renvoyé par Buybox est différent de celui du cookie"
+
+#: includes/class-wc-buybox-gateway.php:182
+msgid "Order finished with Buybox!"
+msgstr "Commande auprès de Buybox terminée!"
+
+#: includes/class-wc-buybox-gateway.php:189
+msgid "Payment accepted by buybox"
+msgstr "Paiement accepté par Buybox"
+
+#: includes/class-wc-buybox-gateway.php:192
+#, php-format
+msgid "Payment %s via IPN."
+msgstr ""
+
+#: includes/class-wc-buybox-gateway.php:231
+msgid "Thank you for your order, you will be redirected on buybox platform."
+msgstr ""
+"Merci de votre commande, vous allez être redirigé vers la plateforme Buybox."
+
+#: includes/class-wc-buybox-gateway.php:281
+msgid "Could not insert term relationship into the database"
+msgstr ""
+
+#: includes/class-wc-buybox-gateway.php:323
+msgid "No token given by Buybox"
+msgstr "Aucun token n'a été renvoyé par Buybox"
+
+#: wc-buybox.php:23
+msgid "<strong>Error!</strong> Woocommerce is mandatory. Please install it."
+msgstr ""
+"<strong>Erreur!</strong> Woocommerce est obligatoire, vous devez l'installer"
+
+#: wc-buybox.php:35
+#, php-format
+msgid ""
+"<strong>Error!</strong> WoocommerceBuybox requires at least PHP %s! Your "
+"version is: %s. Please upgrade."
+msgstr ""
+
+#: wc-buybox.php:53
+#, php-format
+msgid ""
+"<strong>Error!</strong> WoocommerceBuybox requires at least Woocommerce %s! "
+"Your version is: %s. Please upgrade."
+msgstr ""
+
+#: wc-buybox.php:161
+msgid "Settings"
+msgstr "Configuration"
+
+#: wc-buybox.php:163
+msgid "Docs"
+msgstr "Documentation"
+
+#~ msgid "invoiceTitle:"
+#~ msgstr "Intitulé du moyen de paiement:"
