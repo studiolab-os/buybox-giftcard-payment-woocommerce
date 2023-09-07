@@ -119,7 +119,7 @@ class WC_BUYBOX_GATEWAY extends WC_Payment_Gateway
         $this->merchant_name = $this->get_option('woocommerce_buybox_merchant_name');
         $this->service_domain = $this->get_option('woocommerce_buybox_service_domain');
 
-        $this->title = sprintf(__('Buybox Gift card %s &nbsp;', 'woocommerce-buybox'), $this->merchant_name);
+        $this->title = sprintf(__('Gift card %s &nbsp;', 'woocommerce-buybox'), $this->merchant_name);
         $this->method_description = <<<HTML
             <div>
                 <img style="width:150px;" src="{$plugin_url}/images/logo.svg" alt="Buybox">
