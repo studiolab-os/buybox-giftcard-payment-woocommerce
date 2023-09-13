@@ -108,7 +108,7 @@ class WC_BUYBOX_GATEWAY extends WC_Payment_Gateway
         $plugin_url = WC_BB_PLUGIN_URL;
 
         $this->id = 'woocommerce_buybox';
-        $this->icon = sprintf('%s/images/logo.svg', WC_BB_PLUGIN_URL);
+        $this->icon = sprintf('%simages/logo.svg', WC_BB_PLUGIN_URL);
         $this->has_fields = false;
 
         $this->enabled = $this->get_option('woocommerce_buybox_is_enabled');

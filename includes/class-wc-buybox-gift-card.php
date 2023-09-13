@@ -7,8 +7,9 @@ class WC_BUYBOX_GIFTCARD
         load_plugin_textdomain(
             'woocommerce-buybox',
             false,
-            sprintf('%s/languages/', dirname(dirname(plugin_basename(__FILE__))) . '/languages/')
+            sprintf('%s/languages/', dirname(dirname(plugin_basename(__FILE__))))
         );
+
 
         $this->load_dependencies();
         $this->woo_gateway_hooks();

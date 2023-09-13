@@ -3,7 +3,7 @@
  * Plugin Name: Woocommerce Buybox
  * Text Domain: woocommerce-buybox
  * Description: Accepts payments by social gift card.
- * Version: 2.0.1
+ * Version: 2.0.2
  * Author: Studiolab
  **/
 
@@ -102,6 +102,7 @@ register_uninstall_hook(__FILE__, 'woocommerce_buybox_uninstall');
 
 load_buybox_plugin_textdomain();
 
+
 function woocommerce_buybox_activation()
 {
     global $wpdb, $wp_roles;
@@ -152,12 +153,6 @@ function woocommerce_buybox_uninstall()
 
 function load_buybox_plugin_textdomain()
 {
-    $locale = apply_filters('plugin_locale', get_locale(), 'woocommerce-buybox');
-
-    load_textdomain(
-        'woocommerce-buybox',
-        WP_LANG_DIR . '/woocommerce-buybox/woocommerce-buybox-' . $locale . '.mo'
-    );
     load_plugin_textdomain(
         'woocommerce-buybox',
         false,

@@ -8,6 +8,15 @@ class WC_BUYBOX_CONFIG
             define('WC_BB_CORE_DIR', untrailingslashit(plugin_dir_path(__FILE__)));
         }
 
+        if (!defined('WC_BB_PLUGIN_FOLDER_NAME')) {
+            $pluginPath = dirname(__FILE__, 2);
+            $pluginPathToArray = explode('/', $pluginPath);
+            $pluginFolderName = end($pluginPathToArray);
+
+            define('WC_BB_PLUGIN_FOLDER_NAME', $pluginFolderName);
+
+        }
+
         if (!defined('WC_BB_PHP_VERSION')) {
             define('WC_BB_PHP_VERSION', '7.4');
         }
@@ -25,10 +34,7 @@ class WC_BUYBOX_CONFIG
         }
 
         if (!defined('WC_BB_CORE_URL')) {
-            $pluginPath = dirname(__FILE__, 2);
-            $pluginPathToArray = explode('/', $pluginPath);
-            $pluginFolderName = end($pluginPathToArray);
-            define('WC_BB_CORE_URL', plugins_url($pluginFolderName));
+            define('WC_BB_CORE_URL', plugins_url(WC_BB_PLUGIN_FOLDER_NAME));
         }
 
         if (!defined('WC_BB_PLUGIN_URL')) {
