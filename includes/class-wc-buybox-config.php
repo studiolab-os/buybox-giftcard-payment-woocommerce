@@ -25,7 +25,10 @@ class WC_BUYBOX_CONFIG
         }
 
         if (!defined('WC_BB_CORE_URL')) {
-            define('WC_BB_CORE_URL', plugins_url('woocommerce-buybox'));
+            $pluginPath = dirname(__FILE__, 2);
+            $pluginPathToArray = explode('/', $pluginPath);
+            $pluginFolderName = end($pluginPathToArray);
+            define('WC_BB_CORE_URL', plugins_url($pluginFolderName));
         }
 
         if (!defined('WC_BB_PLUGIN_URL')) {

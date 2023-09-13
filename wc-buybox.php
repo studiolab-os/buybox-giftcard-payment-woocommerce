@@ -3,7 +3,7 @@
  * Plugin Name: Woocommerce Buybox
  * Text Domain: woocommerce-buybox
  * Description: Accepts payments by social gift card.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: Studiolab
  **/
 
@@ -102,7 +102,6 @@ register_uninstall_hook(__FILE__, 'woocommerce_buybox_uninstall');
 
 load_buybox_plugin_textdomain();
 
-
 function woocommerce_buybox_activation()
 {
     global $wpdb, $wp_roles;
@@ -118,14 +117,14 @@ function woocommerce_buybox_activation()
     $order_table = $wpdb->prefix . 'woocommerce_buybox_order';
     $trustbox_order_table = $wpdb->prefix . 'woocommerce_trustbox_order';
     // create tables
-    if (!$wpdb->get_var("SHOW TABLES LIKE $order_table")) {
+    if (!$wpdb->get_var("SHOW TABLES LIKE '{$order_table}';")) {
         $queries[] = "CREATE TABLE {$order_table} (
 			`id_order` int(10) unsigned NOT NULL auto_increment,
   			`id_transaction` varchar(255) NOT NULL,
   			PRIMARY KEY (`id_order`)
 		) $charset_collate;";
     }
-    if (!$wpdb->get_var("SHOW TABLES LIKE {$trustbox_order_table}")) {
+    if (!$wpdb->get_var("SHOW TABLES LIKE '{$trustbox_order_table}';")) {
         $queries[] = "CREATE TABLE {$trustbox_order_table} (
 			`id_order` int(10) unsigned NOT NULL auto_increment,
   			`token` varchar(255) NOT NULL,
