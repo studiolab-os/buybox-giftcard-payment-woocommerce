@@ -224,14 +224,9 @@ class WC_BUYBOX_GATEWAY extends WC_Payment_Gateway
     {
         $order = new WC_order($order_id);
         $currencyCodeType = get_woocommerce_currency();
-        $paymentAmount = floatval(WC()->cart->total);
-
-        if ($paymentAmount <= 0) {
-            $paymentAmount = floatval($order->get_total());
-        }
 
         $params = [
-            'AMT' => $paymentAmount,
+            'AMT' => floatval($order->get_total()),
             'PAYMENTACTION' => 'Sale',
             'RETURNURL' => $this->get_return_url($order),
             'CANCELURL' => esc_url_raw($order->get_cancel_order_url_raw()),
