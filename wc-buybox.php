@@ -14,12 +14,7 @@ if (false === defined('ABSPATH')) {
 
 include_once('includes/class-wc-buybox-config.php');
 
-if (
-    !in_array(
-        'woocommerce/woocommerce.php',
-        apply_filters('active_plugins', get_option('active_plugins'))
-    )
-) {
+if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
     function woocommerce_required()
     {
         echo sprintf(
