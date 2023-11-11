@@ -25,7 +25,6 @@ class WC_BUYBOX_GATEWAY extends WC_Payment_Gateway
 
         // Define user set variables
         add_action('woocommerce_update_options_payment_gateways_' . $this->id, [$this, 'process_admin_options']);
-        add_action('woocommerce_receipt_' . $this->id, [$this, 'receipt_page']);
         add_action('woocommerce_thankyou_woocommerce_buybox', [$this, 'check_response']);
     }
 
@@ -138,11 +137,49 @@ class WC_BUYBOX_GATEWAY extends WC_Payment_Gateway
     {
         $order = new WC_order($order_id);
 
+        $currencyCodeType = get_woocommerce_currency();
+
+        $params = [
+            'AMT' => floatval($order->get_total()),
+            'PAYMENTACTION' => 'Sale',
+            'RETURNURL' => $this->get_return_url($order),
+            'CANCELURL' => esc_url_raw($order->get_cancel_order_url_raw()),
+            'CURRENCYCODE' => $currencyCodeType,
+            'NOSHIPPING' => 1,
+            'LOCALECODE' => substr(get_bloginfo('language'), 0, 2)
+        ];
+
+        $result = $this->makeCall($this->getApiUrl(), 'SetExpressCheckout', $params, $currencyCodeType);
+
+        if (is_array($result) and sizeof($result)) {
+            if (strtoupper($result['ACK']) == 'SUCCESS') {
+                if (isset($result['TOKEN'])) {
+                    wc_setcookie('buybox_token',
+                        strval($result['TOKEN']),
+                        null,
+                        apply_filters('wc_session_use_secure_cookie', false)
+                    );
+
+                    return [
+                        'result' => 'success',
+                        'redirect' => 'https://' . $this->getApiDomain() . '/secure/payment_login.php?token='
+                            . urldecode(strval(strval($result['TOKEN']))) . '&useraction=commit&lang='
+                            . str_replace('-', '_', get_bloginfo('language'))
+                    ];
+
+                } else {
+                    WC_BUYBOX_LOGGER::log(__('No token given by Buybox', 'woocommerce-buybox'));
+                }
+            }
+        }
+
+        WC_BUYBOX_LOGGER::log(__('Buybox returned error', 'woocommerce-buybox'));
+
         return [
-            'result' => 'success',
-            'redirect' => $order->get_checkout_payment_url(true)
+            'result' => __('Buybox returned error', 'woocommerce-buybox') . $result['L_ERRORCODE0']
         ];
     }
+
 
     public function payment_fields(): void
     {
@@ -151,39 +188,17 @@ class WC_BUYBOX_GATEWAY extends WC_Payment_Gateway
         }
     }
 
-    /**
-     * @param $order_id
-     */
-    public function receipt_page($order_id): void
-    {
-        $response = $this->getAuthorization($order_id);
-
-        if (is_wp_error($response)) {
-            echo sprintf(' <p>%s </p> ', $response->get_error_message());
-        } else {
-            echo sprintf(
-                '<p >%s </p > ',
-                __('Thank you for your order, you will be redirected on buybox platform . ', 'woocommerce-buybox')
-            );
-        }
-    }
 
     public function check_response($order_id): void
     {
         $token = htmlentities(strval(get_query_var('token', false)), ENT_COMPAT, 'UTF-8');
         $payerID = htmlentities(strval(get_query_var('PayerID', false)), ENT_COMPAT, 'UTF-8');
         $cookie_token = (isset($_COOKIE['buybox_token'])) ? strval($_COOKIE['buybox_token']) : false;
-        $cookie_payer_id = (isset($_COOKIE['buybox_payer_id'])) ? strval($_COOKIE['buybox_payer_id']) : false;
 
         if (!$token || $token != $cookie_token) {
             die('Invalid cookie token');
         }
 
-        if (!$payerID) {
-            if (!$payerID = $cookie_payer_id) {
-                $this->getAuthorization($order_id);
-            }
-        }
 
         $this->validate_order($order_id, $token, $payerID, 'payment');
     }
@@ -211,55 +226,6 @@ class WC_BUYBOX_GATEWAY extends WC_Payment_Gateway
     private function getApiUrl(): string
     {
         return 'https://' . $this->getApiDomain() . '/secure/express-checkout/nvp.php';
-    }
-
-    /**
-     * Generate buybox button link
-     *
-     * @param $order_id
-     *
-     * @return ?array|WP_Error
-     */
-    private function getAuthorization($order_id)
-    {
-        $order = new WC_order($order_id);
-        $currencyCodeType = get_woocommerce_currency();
-
-        $params = [
-            'AMT' => floatval($order->get_total()),
-            'PAYMENTACTION' => 'Sale',
-            'RETURNURL' => $this->get_return_url($order),
-            'CANCELURL' => esc_url_raw($order->get_cancel_order_url_raw()),
-            'CURRENCYCODE' => $currencyCodeType,
-            'NOSHIPPING' => 1,
-            'LOCALECODE' => substr(get_bloginfo('language'), 0, 2)
-        ];
-
-        $result = $this->makeCall($this->getApiUrl(), 'SetExpressCheckout', $params, $currencyCodeType);
-
-        if (is_array($result) and sizeof($result)) {
-            if (strtoupper($result['ACK']) == 'SUCCESS') {
-                if (isset($result['TOKEN'])) {
-                    wc_setcookie('buybox_token',
-                        strval($result['TOKEN']),
-                        null,
-                        apply_filters('wc_session_use_secure_cookie', false)
-                    );
-                    $url = 'https://' . $this->getApiDomain() . '/secure/payment_login.php?token='
-                        . urldecode(strval(strval($result['TOKEN']))) . '&useraction=commit&lang='
-                        . str_replace('-', '_', get_bloginfo('language'));
-                    header('Location: ' . $url);
-                } else {
-                    WC_BUYBOX_LOGGER::log(__('No token given by Buybox', 'woocommerce-buybox'));
-                }
-            }
-        }
-
-        WC_BUYBOX_LOGGER::log(__('Buybox returned error', 'woocommerce-buybox'));
-        return new WP_Error(
-            'error',
-            __('Buybox returned error', 'woocommerce-buybox') . $result['L_ERRORCODE0']
-        );
     }
 
     private function makeCall($url, $methodName, $params, $currency = "EUR"): ?array
