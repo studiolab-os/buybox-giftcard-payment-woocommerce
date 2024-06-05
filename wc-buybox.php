@@ -3,7 +3,7 @@
  * Plugin Name: Woocommerce Buybox
  * Text Domain: woocommerce-buybox
  * Description: Accepts payments by social gift card.
- * Version: 2.0.3
+ * Version: 2.0.4
  * Author: Studiolab
  **/
 
