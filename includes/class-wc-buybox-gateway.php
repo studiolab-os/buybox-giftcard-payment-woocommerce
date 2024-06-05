@@ -141,6 +141,7 @@ class WC_BUYBOX_GATEWAY extends WC_Payment_Gateway
 
         $params = [
             'AMT' => floatval($order->get_total()),
+            'INVNUM' => $order_id,
             'PAYMENTACTION' => 'Sale',
             'RETURNURL' => $this->get_return_url($order),
             'CANCELURL' => esc_url_raw($order->get_cancel_order_url_raw()),
@@ -240,7 +241,7 @@ class WC_BUYBOX_GATEWAY extends WC_Payment_Gateway
 
         $params = array_merge($params, $authenticationParams);
 
-        $response = $this->callApi($url, $params, true);
+        $response = $this->callApi($url, $params);
 
         WC_BUYBOX_LOGGER::log(__('Buybox response:', 'woocommerce-buybox'));
         WC_BUYBOX_LOGGER::log($response);
